@@ -10,6 +10,11 @@ export default class BaseballGameView {
         output.textContent = '';
     }
 
+    resetUserInput() {
+        const input = document.querySelector("#user-input");
+        input.value = null;
+    }
+
     toggleButtons(visible) {
         document.querySelector("#submit").style.display = visible ? 'block' : 'none';
         document.querySelector("#game-restart-button").style.display = visible ? 'none' : 'block';

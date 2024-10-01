@@ -1,12 +1,15 @@
+import NumberUtils from "../\butils/NumberUtils.js";
+
 export default class BaseballGame {
 
     constructor() {
         this.NumberUtils = new NumberUtils();
+        this.computerNumbers = this.makeComputerNumbers();
     }
 
     play(userNumbers) {
-        const computerNumbers = this.makeComputerNumbers();
-        const strikeAndBallCounts = this.compareNumbers(userNumbers, computerNumbers);
+        console.log(this.computerNumbers);
+        const strikeAndBallCounts = this.compareNumbers(userNumbers, this.computerNumbers);
         return this.extractResult(strikeAndBallCounts);
     }
 
@@ -56,7 +59,6 @@ export default class BaseballGame {
 
     restart() {
       this.computerNumbers = this.makeComputerNumbers();
-      this.toggleButtons(true);
     }
 
     isPlayerWinner(result) {

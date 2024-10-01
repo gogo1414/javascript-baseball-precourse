@@ -1,13 +1,13 @@
 import BaseBallGame from "../model/BaseBallGame.js";
 import BaseBallGameView from "../view/BaseBallGameView.js";
-import NumberValidator from "../utils/NumberValidator.js";
+import NumberUtils from "../\butils/NumberUtils.js";
 
 export default class BaseballGameController {
 
     constructor() {
         this.BaseBallGame = new BaseBallGame();
         this.BaseBallGameView = new BaseBallGameView();
-        this.NumberValidator = new NumberValidator();
+        this.NumberUtils = new NumberUtils();
         this.gameStart();
     }
 
@@ -40,14 +40,19 @@ export default class BaseballGameController {
 
         this.BaseBallGameView.toggleButtons(false);
 
-        restartButton.addEventListener('click', () => BaseBallGame.restart());
+        restartButton.addEventListener('click', () => {
+            this.BaseBallGame.restart();
+            this.BaseBallGameView.toggleButtons(true);
+            this.BaseBallGameView.resetUserInput();
+            this.BaseBallGameView.resetResult();
+        });
     }
 
     validateUserNumbers(userInput, userNumbers) {
-        if(!this.NumberValidator.validateDifferentNumber(userNumbers))
+        if(!this.NumberUtils.validateDifferentNumber(userNumbers))
             return alert("잘못된 입력입니다. 중복되지 않는 서로 다른 3개의 숫자를 입력하세요.");
         else 
-        if(!this.NumberValidator.validateNumbers(userInput)) 
+        if(!this.NumberUtils.validateNumbers(userInput)) 
             return alert("잘못된 입력입니다. 1부터 9까지의 숫자만 입력하세요.");
     }
 }
